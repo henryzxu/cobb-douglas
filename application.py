@@ -14,9 +14,9 @@ test_changes = [Change_Request(5, "s", 0.50), Change_Request(70, "n", 0.07)]
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+application = dash.Dash(__name__, external_stylesheets=external_stylesheets)
 
-app.layout = html.Div(children=[
+application.layout = html.Div(children=[
     dcc.Graph(
         id='main-display'
     ),
@@ -189,4 +189,4 @@ def update_figure(alpha, n, g, s, e, d, delta_n, delta_g, delta_s, delta_d, time
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    application.run_server(debug=True)
