@@ -17,6 +17,7 @@ app.layout = html.Div(children=[
         id='main-display'
     ),
     dcc.Slider(
+        currentvalue = {"prefix": "alpha: "},
         id='alpha-slider',
         min=0.01,
         max=.99,
@@ -24,6 +25,7 @@ app.layout = html.Div(children=[
         step=0.01
     ),
     dcc.Slider(
+        currentvalue={"prefix": "base efficiency: "},
         id='e-slider',
         min=0,
         max=10000,
@@ -31,6 +33,7 @@ app.layout = html.Div(children=[
         step=100
     ),
     dcc.Slider(
+        currentvalue={"prefix": "efficiency growth: "},
         id='g-slider',
         min=0.00,
         max=.5,
@@ -38,6 +41,7 @@ app.layout = html.Div(children=[
         step=0.001
     ),
     dcc.Slider(
+        currentvalue={"prefix": "labor growth: "},
         id='n-slider',
         min=0.00,
         max=.5,
@@ -45,6 +49,7 @@ app.layout = html.Div(children=[
         step=0.001
     ),
     dcc.Slider(
+        currentvalue={"prefix": "savings: "},
         id='s-slider',
         min=0.00,
         max=.8,
@@ -52,13 +57,16 @@ app.layout = html.Div(children=[
         step=0.001
     ),
     dcc.Slider(
+        currentvalue={"prefix": "depreciation: "},
         id='d-slider',
         min=0.00,
         max=.5,
         value=.05,
         step=0.001
     ),
+    html.Div(children="DELTA'S ARE HIGHLY EXPERIMENTAL"),
     dcc.Slider(
+        currentvalue={"prefix": "delta g: "},
         id='delta-g-slider',
         min=0.00,
         max=.2,
@@ -66,6 +74,7 @@ app.layout = html.Div(children=[
         step=0.001
     ),
     dcc.Slider(
+        currentvalue={"prefix": "delta n: "},
         id='delta-n-slider',
         min=0.00,
         max=.2,
@@ -73,6 +82,7 @@ app.layout = html.Div(children=[
         step=0.001
     ),
     dcc.Slider(
+        currentvalue = {"prefix": "delta s: "},
         id='delta-s-slider',
         min=0.00,
         max=.2,
@@ -80,13 +90,16 @@ app.layout = html.Div(children=[
         step=0.001
     ),
     dcc.Slider(
+        currentvalue = {"prefix": "delta d: "},
         id='delta-d-slider',
         min=0.00,
         max=.2,
         value=0,
         step=0.001
     ),
+    html.Div(children="Keep number of time periods relatively low for fastest performance, high for better visualization of convergence"),
     dcc.Slider(
+        currentvalue = {"prefix": "number of time periods: "},
         id='time-slider',
         min=0,
         max=100,
