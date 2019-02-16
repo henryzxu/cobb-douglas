@@ -1,0 +1,1 @@
+# Dynamic Cobb-Douglas Functions
