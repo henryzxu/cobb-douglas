@@ -4,6 +4,7 @@ import dash_html_components as html
 from gen_data import Properties, Change_Request, produce_data
 import plotly.graph_objs as go
 from plotly import tools
+import pandas as pd
 from dash.dependencies import Output, Input, State
 
 
@@ -16,6 +17,7 @@ app.layout = html.Div(children=[
     dcc.Graph(
         id='main-display'
     ),
+    html.Div(children="alpha"),
     dcc.Slider(
         id='alpha-slider',
         min=0.01,
@@ -23,6 +25,7 @@ app.layout = html.Div(children=[
         value=.33,
         step=0.01
     ),
+    html.Div(children="base efficiency"),
     dcc.Slider(
         id='e-slider',
         min=0,
@@ -30,6 +33,7 @@ app.layout = html.Div(children=[
         value=1000,
         step=100
     ),
+    html.Div(children="efficiency growth"),
     dcc.Slider(
         id='g-slider',
         min=0.00,
@@ -37,6 +41,7 @@ app.layout = html.Div(children=[
         value=.02,
         step=0.001
     ),
+    html.Div(children="labor growth"),
     dcc.Slider(
         id='n-slider',
         min=0.00,
@@ -44,6 +49,7 @@ app.layout = html.Div(children=[
         value=.02,
         step=0.001
     ),
+    html.Div(children="savings"),
     dcc.Slider(
         id='s-slider',
         min=0.00,
@@ -51,6 +57,7 @@ app.layout = html.Div(children=[
         value=.2,
         step=0.001
     ),
+    html.Div(children="depreciation"),
     dcc.Slider(
         id='d-slider',
         min=0.00,
@@ -58,7 +65,7 @@ app.layout = html.Div(children=[
         value=.05,
         step=0.001
     ),
-    html.Div(children="DELTA'S ARE HIGHLY EXPERIMENTAL"),
+    html.Div(children="Following 4 sliders are highly experimental"),
     dcc.Slider(
         id='delta-g-slider',
         min=0.00,
@@ -88,6 +95,7 @@ app.layout = html.Div(children=[
         step=0.001
     ),
     html.Div(children="Keep number of time periods relatively low for fastest performance, high for better visualization of convergence"),
+    html.Div(children="time periods"),
     dcc.Slider(
         id='time-slider',
         min=0,
@@ -95,8 +103,11 @@ app.layout = html.Div(children=[
         value=25,
         step=1
     ),
-    dcc.Input(id='request-change', type='text', value='format: 10 n 0.02')
+    dcc.Input(id='request-change', type='text', value='format: 10 n 0.02'),
+    html.Div(id='data-value', style={'display': 'none'})
 ])
+
+
 
 def parse_requests(s):
     if "format" in s:
@@ -113,9 +124,7 @@ def parse_requests(s):
     except:
         return []
 
-@app.callback(
-    dash.dependencies.Output('main-display', 'figure'),
-    [dash.dependencies.Input('alpha-slider', 'value'),
+@app.callback(Output('data-value', 'children'), [dash.dependencies.Input('alpha-slider', 'value'),
      dash.dependencies.Input('n-slider', 'value'),
      dash.dependencies.Input('g-slider', 'value'),
      dash.dependencies.Input('s-slider', 'value'),
@@ -126,11 +135,18 @@ def parse_requests(s):
      dash.dependencies.Input('delta-s-slider', 'value'),
      dash.dependencies.Input('delta-d-slider', 'value'),
      dash.dependencies.Input('time-slider', 'value'),
-     Input('request-change', 'value')]
+     Input('request-change', 'value')])
+def gen_data(alpha, n, g, s, e, d, delta_n, delta_g, delta_s, delta_d, time, changes):
+     p = Properties(alpha, e, g, n, s, d, delta_g, delta_n, delta_d, delta_s)
+     df, _ = produce_data(p, time, parse_requests(changes))
+     return df.to_json(orient='split')
+
+@app.callback(
+    dash.dependencies.Output('main-display', 'figure'),
+    [Input('data-value', 'children')]
 )
-def update_figure(alpha, n, g, s, e, d, delta_n, delta_g, delta_s, delta_d, time, changes):
-    p = Properties(alpha, e, g, n, s, d, delta_g, delta_n, delta_d, delta_s)
-    df, _ = produce_data(p, time, parse_requests(changes))
+def update_figure(data):
+    df = pd.read_json(data, orient='split')
     fig = tools.make_subplots(rows=2, cols=3,
                               specs=[[{"colspan": 3}, None, None],
                                  [{}, {}, {}]])
