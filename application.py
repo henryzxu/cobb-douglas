@@ -1,22 +1,18 @@
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
-import pandas as pd
-import numpy as np
 from gen_data import Properties, Change_Request, produce_data
 import plotly.graph_objs as go
 from plotly import tools
 from dash.dependencies import Output, Input, State
 
-test_changes = [Change_Request(5, "s", 0.50), Change_Request(70, "n", 0.07)]
-
-
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
-application = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
+application = app.server
 
-application.layout = html.Div(children=[
+app.layout = html.Div(children=[
     dcc.Graph(
         id='main-display'
     ),
@@ -189,4 +185,4 @@ def update_figure(alpha, n, g, s, e, d, delta_n, delta_g, delta_s, delta_d, time
 
 
 if __name__ == '__main__':
-    application.run_server(debug=True)
+    application.run(debug=True)
