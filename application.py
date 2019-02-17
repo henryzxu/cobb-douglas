@@ -264,45 +264,49 @@ def update_figure(data, curr_time):
             x=df["k_over_l"][i],
             y=df["y_over_l"][i],
             mode='lines',
-            opacity=0.7,
+            opacity=0.5,
             legendgroup='group1',
             name="t={}, E={:n}".format(i, int(df["metadata"][i]["e"])),
-            showlegend=False
+            showlegend=False,
+            line=dict(width = 1)
         ), 1, 1)
     fig.append_trace(go.Scatter(
         x=pd.concat([pd.Series([0]), df["point_k_over_l"][:curr_time]]),
         y=pd.concat([pd.Series([0]), df["point_y_over_l"][:curr_time]]),
         mode='lines+markers',
-        opacity=0.7,
+        opacity=1,
         legendgroup='group4',
         marker={
             'size': 15,
             'line': {'width': 0.5, 'color': 'white'}
         },
+        line=dict(width=4),
         name="Sample Economy at BGE at Time 0"
     ), 1, 1)
     fig.append_trace(go.Scatter(
         x=pd.concat([pd.Series([0]), df["bge_k_over_l"][:curr_time]]),
         y=pd.concat([pd.Series([0]), df["bge"][:curr_time]]),
         mode='lines+markers',
-        opacity=0.7,
+        opacity=1,
         legendgroup='group5',
         marker={
             'size': 15,
             'line': {'width': 0.5, 'color': 'white'}
         },
+        line=dict(width=4),
         name="Current BGE"
     ), 1, 1)
     fig.append_trace(go.Scatter(
         x=pd.concat([pd.Series([0]), df["bge_k_over_l"][:curr_time]]),
         y=pd.concat([pd.Series([0]), df["bge_k_over_l"] * default_df["y_over_k"]]),
         mode='lines+markers',
-        opacity=0.7,
+        opacity=1,
         legendgroup='group2',
         marker={
             'size': 15,
             'line': {'width': 0.5, 'color': 'white'}
         },
+        line=dict(width=4),
         name="Original BGE"
     ), 1, 1)
     fig.append_trace(go.Scatter(
