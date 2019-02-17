@@ -5,6 +5,7 @@ from gen_data import Properties, Change_Request, produce_data
 import plotly.graph_objs as go
 from plotly import tools
 import pandas as pd
+import numpy as np
 from dash.dependencies import Output, Input, State
 
 
@@ -269,8 +270,8 @@ def update_figure(data, curr_time):
             showlegend=False
         ), 1, 1)
     fig.append_trace(go.Scatter(
-        x=df["point_k_over_l"][:curr_time],
-        y=df["point_y_over_l"][:curr_time],
+        x=pd.concat([pd.Series([0]), df["point_k_over_l"][:curr_time]]),
+        y=pd.concat([pd.Series([0]), df["point_y_over_l"][:curr_time]]),
         mode='lines+markers',
         opacity=0.7,
         legendgroup='group4',
@@ -281,8 +282,8 @@ def update_figure(data, curr_time):
         name="Point Starting at BGE"
     ), 1, 1)
     fig.append_trace(go.Scatter(
-        x=df["bge_k_over_l"][:curr_time],
-        y=df["bge"][:curr_time],
+        x=pd.concat([pd.Series([0]), df["bge_k_over_l"][:curr_time]]),
+        y=pd.concat([pd.Series([0]), df["bge"][:curr_time]]),
         mode='lines+markers',
         opacity=0.7,
         legendgroup='group5',
@@ -293,8 +294,8 @@ def update_figure(data, curr_time):
         name="BGE"
     ), 1, 1)
     fig.append_trace(go.Scatter(
-        x=[0] + default_df["bge_k_over_l"][:curr_time],
-        y=[0] + default_df["bge"][:curr_time],
+        x=pd.concat([pd.Series([0]), df["bge_k_over_l"][:curr_time]]),
+        y=pd.concat([pd.Series([0]), df["bge_k_over_l"] * default_df["y_over_k"]]),
         mode='lines+markers',
         opacity=0.7,
         legendgroup='group2',
