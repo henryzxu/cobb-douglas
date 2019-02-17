@@ -279,7 +279,7 @@ def update_figure(data, curr_time):
             'size': 15,
             'line': {'width': 0.5, 'color': 'white'}
         },
-        name="Point Starting at BGE"
+        name="Sample Economy Starting at Current BGE at Time 0"
     ), 1, 1)
     fig.append_trace(go.Scatter(
         x=pd.concat([pd.Series([0]), df["bge_k_over_l"][:curr_time]]),
@@ -291,7 +291,7 @@ def update_figure(data, curr_time):
             'size': 15,
             'line': {'width': 0.5, 'color': 'white'}
         },
-        name="BGE"
+        name="Current BGE"
     ), 1, 1)
     fig.append_trace(go.Scatter(
         x=pd.concat([pd.Series([0]), df["bge_k_over_l"][:curr_time]]),
