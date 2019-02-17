@@ -341,7 +341,7 @@ def update_figure(data, curr_time):
     ), 2, 3)
 
 
-    fig['layout'].update(height=800, hovermode='closest',
+    fig['layout'].update(height=1000, hovermode='closest',
                 yaxis={
                              'range': [min(df["bge"][:curr_time].min(), df["point_y_over_l"][:curr_time].min()) * 0.3, max(df["bge"][:curr_time].max(),
                                                                                                    df["point_y_over_l"][:curr_time].max()) * 1.15]
