@@ -1,6 +1,7 @@
 import numpy as np
 import pandas as pd
 import copy
+import difflib
 
 
 # version 2
@@ -24,10 +25,10 @@ time_periods = 5
 class Change_Request:
     def __init__(self, time_period, param_to_change, new_val):
         self.time_period = time_period
-        self.param_to_change = param_to_change
+        self.param_to_change = difflib.get_close_matches(param_to_change, list(vars(Properties(0,0,0,0,0,0)).keys()))[0]
         self.new_val = new_val
     def __repr__(self):
-        return "{} {} {}".format(self.time_period, self.param_to_change, self.new_val)
+        return "Effective Time Period: {}, Parameter: '{}', New Val: {}".format(self.time_period, self.param_to_change, self.new_val)
 
 
 class Properties:
@@ -81,7 +82,7 @@ def gen_multiple_time_data(props, k_over_l_values, start_time, end_time, point=N
         data["bge"].append(BGE_y_over_l)
         data["y_over_k"].append(y_over_k)
         data["k_over_l"].append(k_over_l_values)
-        data["metadata"].append(vars(props))
+        data["metadata"].append(dict(vars(props)))
         if point:
             point[0] = gen_single_point_data(props.alpha, props.e,
                                              props.g, props.n, props.s,
