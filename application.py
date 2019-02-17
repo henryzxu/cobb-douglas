@@ -129,6 +129,8 @@ html.Div(id="delta-d", children="delta d"),
     html.Div(id='change-request-list', children='Example: 10 n 0.06, 20 g 0.1'),
     html.Div(id='data-value', style={'display': 'none'})], style={'margin': 100})], style={'margin':50, 'textAlign': 'center'})
 
+default_p = Properties(.33, 1000, 0.02, 0.02, 0.2, 0.05)
+default_df, _ = produce_data(default_p, 100, [])
 
 @app.callback(Output('n-periods', 'children'),
               [dash.dependencies.Input('time-slider', 'value')])
@@ -269,7 +271,7 @@ def update_figure(data, curr_time):
     fig.append_trace(go.Scatter(
         x=df["point_k_over_l"][:curr_time],
         y=df["point_y_over_l"][:curr_time],
-        mode='markers',
+        mode='lines+markers',
         opacity=0.7,
         legendgroup='group4',
         marker={
@@ -281,7 +283,7 @@ def update_figure(data, curr_time):
     fig.append_trace(go.Scatter(
         x=df["bge_k_over_l"][:curr_time],
         y=df["bge"][:curr_time],
-        mode='markers',
+        mode='lines+markers',
         opacity=0.7,
         legendgroup='group5',
         marker={
@@ -289,6 +291,18 @@ def update_figure(data, curr_time):
             'line': {'width': 0.5, 'color': 'white'}
         },
         name="BGE"
+    ), 1, 1)
+    fig.append_trace(go.Scatter(
+        x=[0] + default_df["bge_k_over_l"][:curr_time],
+        y=[0] + default_df["bge"][:curr_time],
+        mode='lines+markers',
+        opacity=0.7,
+        legendgroup='group2',
+        marker={
+            'size': 15,
+            'line': {'width': 0.5, 'color': 'white'}
+        },
+        name="Original BGE"
     ), 1, 1)
     fig.append_trace(go.Scatter(
             x=df["t"][1:curr_time],
