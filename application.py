@@ -298,8 +298,8 @@ def update_figure(data, curr_time):
         name="Current BGE"
     ), 1, 1)
     fig.append_trace(go.Scatter(
-        x=pd.concat([pd.Series([0]), df["bge_k_over_l"][:curr_time]]),
-        y=pd.concat([pd.Series([0]), df["bge_k_over_l"] * default_df["y_over_k"]]),
+        x=pd.concat([pd.Series([0]), df["point_k_over_l"][:curr_time]]),
+        y=pd.concat([pd.Series([0]), df["point_k_over_l"][:curr_time] * default_df["y_over_k"][:curr_time]]),
         mode='lines+markers',
         opacity=1,
         legendgroup='group2',
