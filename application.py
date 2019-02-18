@@ -7,6 +7,7 @@ from plotly import tools
 import pandas as pd
 import numpy as np
 from dash.dependencies import Output, Input, State
+# from werkzeug.contrib.profiler import ProfilerMiddleware
 
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -205,7 +206,7 @@ def parse_requests(s):
         for c in s:
             if c:
                 c = c.strip().split(" ")
-                ret.append(Change_Request(int(c[0]), c[1], float(c[2])))
+                ret.append(Change_Request(int(c[0]), "".join(c[1:-1]), float(c[-1])))
         return ret
     except:
         return []
@@ -315,7 +316,7 @@ def update_figure(data, curr_time):
             mode='lines',
             opacity=0.7,
         legendgroup='group4',
-        name="Point g(Y/L)"
+        name="Sample g(Y/L)"
         ), 2, 1)
     fig.append_trace(go.Scatter(
         x=df["t"][1:curr_time],
@@ -332,7 +333,7 @@ def update_figure(data, curr_time):
         mode='lines',
         opacity=0.7,
         legendgroup='group4',
-        name="Point g(K/L)"
+        name="SampleSample g(K/L)"
     ), 2, 2)
     fig.append_trace(go.Scatter(
         x=df["t"][1:curr_time],
@@ -347,7 +348,7 @@ def update_figure(data, curr_time):
         y=df["bge"][:curr_time],
         mode='lines',
         opacity=0.7,
-        legendgroup='group4',
+        legendgroup='group5',
         name="BGE Y/L w.r.t T"
     ), 2, 3)
     fig.append_trace(go.Scatter(
@@ -355,8 +356,8 @@ def update_figure(data, curr_time):
         y=df["point_y_over_l"][:curr_time],
         mode='lines',
         opacity=0.7,
-        legendgroup='group5',
-        name="Point Y/L w.r.t T"
+        legendgroup='group4',
+        name="Sample Y/L w.r.t T"
     ), 2, 3)
 
 
@@ -397,4 +398,6 @@ def update_figure(data, curr_time):
 
 
 if __name__ == '__main__':
-    application.run(threaded=True)
+    # application.config['PROFILE'] = True
+    # application.wsgi_app = ProfilerMiddleware(application.wsgi_app, restrictions=[300])
+    application.run(debug=True, threaded=True)
