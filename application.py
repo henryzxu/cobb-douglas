@@ -333,7 +333,7 @@ def update_figure(data, curr_time):
         mode='lines',
         opacity=0.7,
         legendgroup='group4',
-        name="SampleSample g(K/L)"
+        name="Sample g(K/L)"
     ), 2, 2)
     fig.append_trace(go.Scatter(
         x=df["t"][1:curr_time],
