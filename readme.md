@@ -15,11 +15,11 @@ Online version can be found here: cobb-douglas.henryzxu.com
   `Example: 10 n 0.06, 20 g 0.1`
  
 -Troubleshooting
-    1. If your dynamic changes don't show up, check if their effective time periods are before the current time period below the graph
-    2. If other changes don't show up, it may be because it just affected the axes, or the web app crashed (see 7.)
+  1. If your dynamic changes don't show up, check if their effective time periods are before the current time period below the graph
+  2. If other changes don't show up, it may be because it just affected the axes, or the web app crashed (see 7.)
 Some issues with graphs ending early can be fixed by increasing the maximum number of time periods
-    3. You can select a portion of the graph to zoom in on by just clicking and dragging on the graph
-    4. Double clicking on the graph will reset it to normal
-    5. As you increase the maximum number of time periods, changes will take longer and longer to take effect--please be patient! 
-    6. Occasionally (or if you're playing with the experimental or dynamic parameter change sections, this will happen quite frequently) the web app may crash. There probably won't be a visual indication (I may fix this in the future), but the sliders most likely won't update anymore if you drag them. To fix this, just restart your webpage and it should reset to normal. **If you have any dynamic change inputs that you'd like to save, I'd highly recommend copy and pasting them somewhere else before refreshing.** 
+  3. You can select a portion of the graph to zoom in on by just clicking and dragging on the graph
+  4. Double clicking on the graph will reset it to normal
+  5. As you increase the maximum number of time periods, changes will take longer and longer to take effect--please be patient! 
+  6. Occasionally (or if you're playing with the experimental or dynamic parameter change sections, this will happen quite frequently) the web app may crash. There probably won't be a visual indication (I may fix this in the future), but the sliders most likely won't update anymore if you drag them. To fix this, just restart your webpage and it should reset to normal. **If you have any dynamic change inputs that you'd like to save, I'd highly recommend copy and pasting them somewhere else before refreshing.** 
 
