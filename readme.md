@@ -2,7 +2,7 @@
 
 Online version can be found here: cobb-douglas.henryzxu.com
  
-## Short User Guide (may be expanded later):
+## Short User Guide 
 -The graphs are all generated using Dash by Plotly
 - Alongside the main production function, there are two sets of points being plotted at all times, one for balanced growth equilibrium, and one for the path of a sample economy. You can toggle which one you'd like to see by clicking the associated section of the legend on the right. 
 - The current time step is controlled by the slider immediately under the graph. To increase the maximum number of time steps, change the "Number of Time Periods" slider in the other section. 
